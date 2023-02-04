@@ -19,17 +19,17 @@ public class Calculator {
             throw new InputExceptions("Ошибка ввода! Пустая входная строка.");
         }
 
-        /* Ищем знак операции и отталкиваясь от него определяем левое и правое число */
+
         ArrayList<String> inputs = new ArrayList();
         for(int i = 0; i < input.length(); ++i){
-            if( isOperation(input.charAt(i)) ){ // Ищем знак операции и делим строку на 3 элемента
+            if( isOperation(input.charAt(i)) ){
                 inputs.add(input.substring(0,i));   // Левое число
                 inputs.add(input.substring(i,i+1)); // Знак операции
                 inputs.add(input.substring(i+1));   // Правое число
                 break;
             }
         }
-        /* Проверка некоректный ввод */
+
         if(inputs.isEmpty()){
             throw new InputExceptions("Ошибка ввода! Не найдена допустимая операция.");
         }else if(inputs.size() == 1){
@@ -38,15 +38,15 @@ public class Calculator {
             throw new InputExceptions("Ошибка ввода! Одно из значений отсутствует.");
         }
 
-        int left, right;  // Переменные для записи чисел после парсинга
-        boolean isRoman = false; // Флаг римских чисел.
+        int left, right;
+        boolean isRoman = false;
 
         /* Парсинг чисел */
         try{
-            // Пробуем получить обычное число
+
             left = Integer.parseInt(inputs.get(0));
             try{
-                // Если сработало, пробуем получить второе число
+
                 right = Integer.parseInt(inputs.get(2));
             }
             catch (NumberFormatException e){
@@ -55,25 +55,25 @@ public class Calculator {
         }
         catch (NumberFormatException e){
             try{
-                // Пробуем получить римское число
+
                 left = RomanNumber.toRoman(inputs.get(0)).getNumber();
             }
             catch (IllegalArgumentException e1){
                 throw new InputExceptions("Ошибка ввода! Неожиданное значение '" + inputs.get(0) + "'.");
             }
             try{
-                // Пробуем получить второе римское число
+
                 right = RomanNumber.toRoman(inputs.get(2)).getNumber();
             }
             catch (IllegalArgumentException e1){
                 throw new InputExceptions("Ошибка ввода! Неожиданное значение '" + inputs.get(2) + "'.");
             }
-            isRoman = true; // Активируем флаг римских чисел
+            isRoman = true;
         }
 
         /* Проверяем входные числа на выход за пределы диапазона [1..10] */
         if (!isValidNumber(left) || !isValidNumber(right)) {
-            /* Кидаем ошибку с указанием на некоректное значение*/
+
             throw new InputExceptions("Ошибка ввода! Недопустимое значение'" + (isValidNumber(right) ?
                     (isRoman ? RomanNumber.toRoman(left): left) :
                     (isRoman ? RomanNumber.toRoman(right): right)
@@ -82,7 +82,7 @@ public class Calculator {
         }
         else{
             int result;
-            /* Определяем нужную операцию */
+
             switch (inputs.get(1).charAt(0)) {
                 case '+':
                     result = left + right;

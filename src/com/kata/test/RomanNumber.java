@@ -8,12 +8,12 @@ public enum RomanNumber {
     RomanNumber(int num){
         this.number = num;
     }
-    /* Оперция получения числового значения */
+
     public int getNumber() {
         return number;
     }
 
-    /* Оперции приведения типов */
+
     public static RomanNumber toRoman(int num){
         return values()[num-1];
     }
@@ -21,7 +21,7 @@ public enum RomanNumber {
         return RomanNumber.valueOf(str);
     }
 
-    /* Оперции сравнения */
+
     public boolean moreThen(RomanNumber rhs){
         return this.getNumber() > rhs.getNumber();
     }
@@ -32,7 +32,7 @@ public enum RomanNumber {
         return this.getNumber() == rhs.getNumber();
     }
 
-    /* Математические операции */
+
     public static RomanNumber sum(RomanNumber lhs, RomanNumber rhs){
         return toRoman(lhs.getNumber() + rhs.getNumber());
     }
