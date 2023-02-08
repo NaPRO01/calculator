@@ -99,14 +99,9 @@ public class Calculator {
                 default:
                     throw new InputExceptions("Ошибка ввода! Неожиданный оператор '" + inputs.get(1) + "'.");
             }
-            /* Проверяем результат на принадлежность диапазону [1..10] */
-            if(isValidNumber(result)){
-                return isRoman ? RomanNumber.toRoman(result).toString() :
-                        Integer.toString(result);
 
-            }else{
-                throw new InputExceptions("Результат вычисления не поддерживается калькулятором.");
-            }
+                return isRoman ? RomanNumber.toRoman(result).toString() : Integer.toString(result);
+
         }
 
     }
